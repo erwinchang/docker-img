@@ -11,9 +11,6 @@ RUN echo 'APT::Install-Recommends 0;' >> /etc/apt/apt.conf.d/01norecommends \
 RUN locale-gen en_US.UTF-8
 RUN DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
 
-#https://stackoverflow.com/questions/28721699/root-password-inside-a-docker-container
-RUN echo "root:Docker!" | chpasswd
-
 #bash
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 

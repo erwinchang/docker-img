@@ -46,6 +46,8 @@ chk=$(cat /home/aosp/.bashrc | grep aosp_bashrc.sh)
     echo ". /home/aosp/aosp_bashrc.sh" >> /home/aosp/.bashrc
 }
 
+echo "aosp:aosp!" | chpasswd
+
 echo "$msg - done"
 sudo adduser aosp sudo
 
