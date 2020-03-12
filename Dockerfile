@@ -1,28 +1,10 @@
-FROM ubuntu:xenial-20181005
+FROM erwinchang/u1604:1.0.0
 
 MAINTAINER Erwin "m9207216@gmail.com"
 
-#https://github.com/sameersbn/docker-ubuntu/blob/14.04/Dockerfile
-RUN echo 'APT::Install-Recommends 0;' >> /etc/apt/apt.conf.d/01norecommends \
- && echo 'APT::Install-Suggests 0;' >> /etc/apt/apt.conf.d/01norecommends \
- && apt-get update \
- && DEBIAN_FRONTEND=noninteractive apt-get install -y vim.tiny wget sudo net-tools ca-certificates unzip apt-transport-https git locales \
- && rm -rf /var/lib/apt/lists/*
+RUN apt-get update \
+ && apt-get install -y curl
 
-RUN locale-gen en_US.UTF-8
-RUN DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
-
-
-#bash
-RUN rm /bin/sh && ln -s /bin/bash /bin/sh
-
-COPY utils/gitconfig /root/.gitconfig
-COPY utils/ssh_config /root/.ssh/config
-COPY utils/docker_entrypoint.sh /root/docker_entrypoint.sh
-COPY utils/aosp_bashrc.sh /root/aosp_bashrc.sh
-RUN mkdir -p /root/aosp
-COPY utils/aosp/.bash_logout /root/aosp
-COPY utils/aosp/.bashrc /root/aosp
-COPY utils/aosp/.profile /root/aosp
-RUN chmod +x /root/docker_entrypoint.sh
-ENTRYPOINT ["/root/docker_entrypoint.sh"]
+#https://websiteforstudents.com/install-hexo-cms-node-js-on-ubuntu-16-04-18-04/
+RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - \
+ && apt-get install -y nodejs

@@ -1,6 +1,7 @@
 #!/bin/bash
 
-docker_img="erwinchang/u1604"
+docker_img="erwinchang/u1604-hexo-build"
+docker_port=8020
 
 #skip docker user
 [ "${USER}" == "aosp" ] && exit 0
@@ -24,6 +25,7 @@ echo "-e DOCKER_PWD=$docker_pwd"
 echo "-e DOCKER_IMG=$docker_img"
 echo "-e WORK_DIR=/home/aosp"
 echo "-e USER_ID=$uid -e GROUP_ID=$gid"
+echo "-p $docker_port:$docker_port"
 echo "-v $mdir:/home/aosp"
 echo "-it --rm --name $name $docker_img /bin/bash"
 docker run -e DOCKER_PWD=$docker_pwd \
@@ -32,4 +34,5 @@ docker run -e DOCKER_PWD=$docker_pwd \
         -e TZ=Asia/Taipei \
         -e USER_ID=$uid \
         -e GROUP_ID=$gid \
+        -p $docker_port:$docker_port \
         -v $mdir:/home/aosp -it --rm --name $name $docker_img /bin/bash

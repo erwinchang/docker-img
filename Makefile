@@ -9,8 +9,8 @@ help:
 
 
 build:
-	@docker build --tag=erwinchang/u1604 .
+	@docker build --tag=erwinchang/u1604-hexo-build .
 
 
 release:
-	@docker build --tag=erwinchang/u1604:$(shell cat VERSION) .
+	@docker build --tag=erwinchang/u1604-hexo-build:$(shell cat VERSION) .
