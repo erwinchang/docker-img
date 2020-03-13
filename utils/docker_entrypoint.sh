@@ -3,6 +3,16 @@
 #Exit immediately if a simple command exits with a non-zero status.
 #set -e
 
+[ "x$DOCKER_TZ" != "x" -a -f /usr/share/zoneinfo/$DOCKER_TZ ] && {
+    ln -sf /usr/share/zoneinfo/$DOCKER_TZ /etc/localtime
+}
+
+[ "x$DOCKER_TZ" != "x" -a ! -f /usr/share/zoneinfo/$DOCKER_TZ ] && {
+    echo ""
+    echo "error: can't found /usr/share/zoneinfo/$DOCKER_TZ"
+    echo ""
+}
+
 #https://github.com/kylemanna/docker-aosp/blob/master/utils/docker_entrypoint.sh 
 
 # Reasonable defaults if no USER_ID/GROUP_ID environment variables are set.
