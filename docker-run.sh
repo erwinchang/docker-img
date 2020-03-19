@@ -1,7 +1,12 @@
 #!/bin/bash
 
-docker_img=erwinchang/u1404
+docker_img=erwinchang/u1404-imx6a442
 docker_tz=Asia/Taipei
+docker_cc_cmd=imx6_bsp442/android_4_4_2/prebuilts/misc/linux-x86/ccache/ccache
+docker_cc_dir=imx6_bsp442/ccache
+
+#create aosp ccache floder
+[ ! -d ./${docker_cc_dir} ] && mkdir -p ${docker_cc_dir}
 
 #skip docker user
 [ "${USER}" == "aosp" ] && exit 0
@@ -24,6 +29,8 @@ echo "docker run"
 echo "-e DOCKER_PWD=$docker_pwd"
 echo "-e DOCKER_IMG=$docker_img"
 echo "-e DOCKER_TZ=$docker_tz"
+echo "-e DOCKER_CC_CMD=$docker_cc_cmd"
+echo "-e DOCKER_CC_DIR=$docker_cc_dir"
 echo "-e TZ=$docker_tz"
 echo "-e WORK_DIR=/home/aosp"
 echo "-e USER_ID=$uid -e GROUP_ID=$gid"
@@ -33,6 +40,8 @@ echo "-it --rm --name $name $docker_img /bin/bash"
 docker run -e DOCKER_PWD=$docker_pwd \
         -e DOCKER_IMG=$docker_img \
         -e DOCKER_TZ=$docker_tz \
+        -e DOCKER_CC_CMD=$docker_cc_cmd \
+        -e DOCKER_CC_DIR=$docker_cc_dir \
         -e TZ=$docker_tz \
         -e WORK_DIR=/home/aosp \
         -e USER_ID=$uid \

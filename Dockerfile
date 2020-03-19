@@ -1,26 +1,26 @@
-FROM ubuntu:trusty-20180112
-MAINTAINER Erwin "m9207216@gmail.com"
+FROM erwinchang/u1404:1.0.0
 
-#https://github.com/sameersbn/docker-ubuntu/blob/14.04/Dockerfile
-RUN echo 'APT::Install-Recommends 0;' >> /etc/apt/apt.conf.d/01norecommends \
- && echo 'APT::Install-Suggests 0;' >> /etc/apt/apt.conf.d/01norecommends \
- && apt-get update \
- && DEBIAN_FRONTEND=noninteractive apt-get install -y vim.tiny wget sudo net-tools ca-certificates unzip apt-transport-https git \
- && rm -rf /var/lib/apt/lists/*
+MAINTAINER Erwin "m9207216@gmail.com" 
 
-RUN locale-gen en_US.UTF-8
-RUN DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
+RUN apt-get update \
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential make curl \
+        python bison g++-multilib gcc-multilib flex zip unzip libxml2-utils \
+        bsdiff gnupg gperf lib32ncurses5-dev libswitch-perl 
 
-#bash
-RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y lib32z1 libc6-i386 \
+    lib32stdc++6 lib32gcc1 lib32ncurses5 u-boot-tools uuid-dev zlib1g-dev liblzo2-dev
 
-COPY utils/gitconfig /root/.gitconfig
-COPY utils/ssh_config /root/.ssh/config
-COPY utils/docker_entrypoint.sh /root/docker_entrypoint.sh
+RUN rm -rf /var/lib/apt/lists/*
+
+#install jvm
+RUN mkdir -p  /usr/lib/jvm
+ADD jdk1.6.0_45.tgz /usr/lib/jvm
+RUN update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk1.6.0_45/bin/java" 1
+RUN update-alternatives --install "/usr/bin/javac" "javac" "/usr/lib/jvm/jdk1.6.0_45/bin/javac" 1
+RUN update-alternatives --install "/usr/bin/javah" "javah" "/usr/lib/jvm/jdk1.6.0_45/bin/javah" 1
+RUN update-alternatives --install "/usr/bin/javap" "javap" "/usr/lib/jvm/jdk1.6.0_45/bin/javap" 1
+RUN update-alternatives --install "/usr/bin/javadoc" "javadoc" "/usr/lib/jvm/jdk1.6.0_45/bin/javadoc" 1
+RUN update-alternatives --install "/usr/bin/jar" "jar" "/usr/lib/jvm/jdk1.6.0_45/bin/jar" 1
+
+#patch aosp_bashrc.sh
 COPY utils/aosp_bashrc.sh /root/aosp_bashrc.sh
-RUN mkdir -p /root/aosp
-COPY utils/aosp/.bash_logout /root/aosp
-COPY utils/aosp/.bashrc /root/aosp
-COPY utils/aosp/.profile /root/aosp
-RUN chmod +x /root/docker_entrypoint.sh
-ENTRYPOINT ["/root/docker_entrypoint.sh"]

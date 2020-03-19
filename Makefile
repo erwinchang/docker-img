@@ -9,8 +9,8 @@ help:
 
 
 build:
-	@docker build --tag=erwinchang/u1404 .
+	@docker build --tag=erwinchang/u1404-imx6a442 .
 
 
 release:
-	@docker build --tag=erwinchang/u1404:$(shell cat VERSION) .
+	@docker build --tag=erwinchang/u1404-imx6a442:$(shell cat VERSION) .
