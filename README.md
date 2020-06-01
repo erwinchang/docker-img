@@ -1,8 +1,8 @@
 # Docker Image
 
-## Ubuntu 1404
+## Ubuntu u1404-imx6ubuntu
 
-build images erwinchang/u1404
+build images erwinchang/u1404-imx6ubuntu
 ```
 make build
 ```
