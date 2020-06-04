@@ -2,7 +2,7 @@
 
 ## Ubuntu 1404
 
-build images erwinchang/u1404-yocto
+build images erwinchang/u1804-piyocto
 ```
 make build
 ```

@@ -1,11 +1,19 @@
-FROM erwinchang/u1404:1.0.0
+FROM erwinchang/u1804:latest
 MAINTAINER Erwin "m9207216@gmail.com"
 
-#http://freescale.github.io/doc/release-notes/2.2/index.html#document-bsp-scope
+#https://jumpnowtek.com/rpi/Raspberry-Pi-Systems-with-Yocto.html
 RUN apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y \
-    gawk wget git-core diffstat unzip texinfo gcc-multilib \
-    build-essential chrpath socat libsdl1.2-dev \
-    u-boot-tools
+    build-essential chrpath diffstat gawk libncurses5-dev python3-distutils texinfo
+
+#https://linuxconfig.org/install-python-2-on-ubuntu-18-04-bionic-beaver-linux
+RUN apt-get update \
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    python-minimal
+
+#fix build error
+RUN apt-get update \
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    cpio file
 
 RUN rm -rf /var/lib/apt/lists/*

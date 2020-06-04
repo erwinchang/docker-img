@@ -1,6 +1,6 @@
 #!/bin/bash
 
-docker_img=erwinchang/u1404-yocto
+docker_img=erwinchang/u1804-piyocto
 docker_tz=Asia/Taipei
 
 #skip docker user
@@ -27,7 +27,6 @@ echo "-e DOCKER_TZ=$docker_tz"
 echo "-e TZ=$docker_tz"
 echo "-e WORK_DIR=/home/aosp"
 echo "-e USER_ID=$uid -e GROUP_ID=$gid"
-echo "-p $docker_port:$docker_port"
 echo "-v $mdir:/home/aosp"
 echo "-it --rm --name $name $docker_img /bin/bash"
 docker run -e DOCKER_PWD=$docker_pwd \
