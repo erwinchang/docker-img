@@ -7,8 +7,8 @@ RUN echo 'APT::Install-Recommends 0;' >> /etc/apt/apt.conf.d/01norecommends \
  && apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y vim.tiny wget sudo net-tools ca-certificates unzip apt-transport-https git locales \
 #https://blog.csdn.net/liumiaocn/article/details/89184511
- && DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata 
-# && rm -rf /var/lib/apt/lists/*
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata \
+ && rm -rf /var/lib/apt/lists/*
 
 RUN locale-gen en_US.UTF-8
 RUN DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
