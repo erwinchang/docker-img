@@ -6,6 +6,6 @@ RUN apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     gawk wget git-core diffstat unzip texinfo gcc-multilib \
     build-essential chrpath socat libsdl1.2-dev \
-    u-boot-tools
+    u-boot-tools curl
 
 RUN rm -rf /var/lib/apt/lists/*
