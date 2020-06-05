@@ -1,4 +1,4 @@
-FROM erwinchang/u1804:latest
+FROM erwinchang/u1804:1.0.0
 MAINTAINER Erwin "m9207216@gmail.com"
 
 #https://jumpnowtek.com/rpi/Raspberry-Pi-Systems-with-Yocto.html
