@@ -16,4 +16,11 @@ RUN apt-get update \
 RUN apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y libstdc++6 lib32stdc++6 lib32z1
 
+#fix u-boot build error
+RUN apt-get update \
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y bc
+
 RUN rm -rf /var/lib/apt/lists/*
+
+COPY utils/docker_entrypoint.sh /root/docker_entrypoint.sh
+RUN chmod +x /root/docker_entrypoint.sh
