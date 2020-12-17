@@ -1,26 +1,17 @@
-FROM ubuntu:trusty-20180112
+FROM erwinchang/u1404:1.0.0
 MAINTAINER Erwin "m9207216@gmail.com"
 
-#https://github.com/sameersbn/docker-ubuntu/blob/14.04/Dockerfile
-RUN echo 'APT::Install-Recommends 0;' >> /etc/apt/apt.conf.d/01norecommends \
- && echo 'APT::Install-Suggests 0;' >> /etc/apt/apt.conf.d/01norecommends \
- && apt-get update \
- && DEBIAN_FRONTEND=noninteractive apt-get install -y vim.tiny wget sudo net-tools ca-certificates unzip apt-transport-https git \
- && rm -rf /var/lib/apt/lists/*
+RUN apt-get update \
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential make curl \
+	python bison g++-multilib gcc-multilib flex zip unzip libxml2-utils \
+	bsdiff gnupg gperf lib32ncurses5-dev libswitch-perl
 
-RUN locale-gen en_US.UTF-8
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y lib32z1 libc6-i386 \
+	lib32stdc++6 lib32gcc1 lib32ncurses5 u-boot-tools uuid-dev zlib1g-dev liblzo2-dev
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y gawk bc libbsd-dev fakeroot cpio bsdmainutils
+
+RUN DEBIAN_FRONTEND=noninteractive rm -rf /var/lib/apt/lists/*
+
+RUN locale-gen en_US en_US.UTF-8
 RUN DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
-
-#bash
-RUN rm /bin/sh && ln -s /bin/bash /bin/sh
-
-COPY utils/gitconfig /root/.gitconfig
-COPY utils/ssh_config /root/.ssh/config
-COPY utils/docker_entrypoint.sh /root/docker_entrypoint.sh
-COPY utils/aosp_bashrc.sh /root/aosp_bashrc.sh
-RUN mkdir -p /root/aosp
-COPY utils/aosp/.bash_logout /root/aosp
-COPY utils/aosp/.bashrc /root/aosp
-COPY utils/aosp/.profile /root/aosp
-RUN chmod +x /root/docker_entrypoint.sh
-ENTRYPOINT ["/root/docker_entrypoint.sh"]
