@@ -1,8 +1,8 @@
 # Docker Image
 
-## Ubuntu 1404
+## Ubuntu 1404-sunplus
 
-build images erwinchang/u1404
+build images erwinchang/u1404-sunplus
 ```
 make build
 ```
