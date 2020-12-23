@@ -1,4 +1,10 @@
-# docker-img
-docker-img
+# Docker Image
 
-u1604: base image
+## Ubuntu 1604
+
+build images erwinchang/u1604-yocto
+```
+make build
+```
+
+docker-run.sh : docker run script

@@ -9,8 +9,8 @@ help:
 
 
 build:
-	@docker build --tag=erwinchang/u1604 .
+	@docker build --tag=erwinchang/u1604-yocto .
 
 
 release:
-	@docker build --tag=erwinchang/u1604:$(shell cat VERSION) .
+	@docker build --tag=erwinchang/u1604-yocto:$(shell cat VERSION) .
