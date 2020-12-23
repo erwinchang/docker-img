@@ -15,7 +15,7 @@ dirx=${dirx#/}			                # remove /
 ssdx="${dirx:0:4}"
 name=$(echo "$dirx" | sed 's/\//./g')
 
-mdir="/home/${USER}/$dirx"
+mdir="${PWD}"
 uid=`id -u`
 gid=`id -g`
 
@@ -27,7 +27,6 @@ echo "-e DOCKER_TZ=$docker_tz"
 echo "-e TZ=$docker_tz"
 echo "-e WORK_DIR=/home/aosp"
 echo "-e USER_ID=$uid -e GROUP_ID=$gid"
-echo "-p $docker_port:$docker_port"
 echo "-v $mdir:/home/aosp"
 echo "-it --rm --name $name $docker_img /bin/bash"
 docker run -e DOCKER_PWD=$docker_pwd \
