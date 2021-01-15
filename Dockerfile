@@ -19,5 +19,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y software-properties-common
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y cpio file
 
+#for VNCAutomotive-CobaltLinkPlus-LinuxViewer build
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y xutils-dev autoconf
+
 RUN rm -rf /var/lib/apt/lists/*
 
