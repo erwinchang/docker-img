@@ -1,6 +1,6 @@
 #!/bin/bash
 
-docker_img=erwinchang/u1404-sunplus
+docker_img=erwinchang/u1404-sunplus-udev
 docker_tz=Asia/Taipei
 
 #skip docker user

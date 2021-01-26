@@ -9,8 +9,8 @@ help:
 
 
 build:
-	@docker build --tag=erwinchang/u1404-sunplus .
+	@docker build --tag=erwinchang/u1404-sunplus-udev .
 
 
 release:
-	@docker build --tag=erwinchang/u1404-sunplus:$(shell cat VERSION) .
+	@docker build --tag=erwinchang/u1404-sunplus-udev:$(shell cat VERSION) .
