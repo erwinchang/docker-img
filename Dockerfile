@@ -9,10 +9,18 @@ RUN apt-get update \
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y lib32z1 libc6-i386 \
 	lib32stdc++6 lib32gcc1 lib32ncurses5 u-boot-tools uuid-dev zlib1g-dev liblzo2-dev
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y gawk bc libbsd-dev fakeroot cpio bsdmainutils
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y gawk bc libbsd-dev fakeroot cpio bsdmainutils tree
 
 #for VNCAutomotive
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y xutils-dev
+
+#https://wiki.beyondlogic.org/index.php?title=Cross_Compiling_SystemD_for_ARM
+#for libudev
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y libtool automake autoconf autogen gettext intltool
+
+#for build systemd 220
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y pkg-config
+
 
 RUN DEBIAN_FRONTEND=noninteractive rm -rf /var/lib/apt/lists/*
 
