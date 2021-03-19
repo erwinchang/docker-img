@@ -2,6 +2,24 @@
 
 export TT_DWORK=${WORK_DIR}
 
+echo ""
+[ "${DOCKER_IMG}x" != "x" ] && echo "DOCKER_IMG:${DOCKER_IMG}"
+[ "${DOCKER_TZ}x" != "x" ] && echo "DOCKER_TZ:${DOCKER_TZ}"
+[ "${DOCKER_CC_CMD}x" != "x" ] && echo "DOCKER_CC_CMD:${DOCKER_CC_CMD}"
+[ "${DOCKER_CC_DIR}x" != "x" ] && echo "DOCKER_CC_DIR:${DOCKER_CC_DIR}"
+
+echo ""
+if [ -d ${DOCKER_CC_DIR} -a -f ${DOCKER_CC_CMD}]; then
+    export CCACHE_DIR=${DOCKER_CC_DIR}
+    ${DOCKER_CC_CMD} -M 5G
+    echo "android cache enabled success"
+    echo "cache path CCACHE_DIR:$CCACHE_DIR"
+else
+    echo "android cacche off"
+    echo "ex. export CCACHE_DIR=xx/xx and prebuilts/misc/linux-x86/ccache/ccache -M 5G"
+fi
+
+
 alias dwork='cd ${WORK_DIR}'
 echo ""
 echo "command list"
